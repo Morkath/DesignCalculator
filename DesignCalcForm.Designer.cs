@@ -905,6 +905,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DesignCalcForm";
             this.Text = "Design Calculator";
+            this.Load += new System.EventHandler(this.DesignCalc_Load);
             this.pan_resultsBar.ResumeLayout(false);
             this.pan_resultsBar.PerformLayout();
             this.menuStrip1.ResumeLayout(false);

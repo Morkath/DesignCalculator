@@ -26,50 +26,41 @@ namespace DesignCalculator
             set { combo_plans.SelectedIndex = value; }
         }
 
-        public decimal SimulationCount
+        public double SimulationCount
         {
-            get { return num_runSimsCount.Value; }
-            set { num_runSimsCount.Value = value; }
+            get { return decimal.ToDouble(num_runSimsCount.Value); }
         }
-        public decimal CompileCount
+        public double CompileCount
         {
-            get { return num_compileDesignCount.Value; }
-            set { num_compileDesignCount.Value = value; }
+            get { return decimal.ToDouble(num_compileDesignCount.Value); }
         }
-        public decimal ResearchTakeSevenCount
+        public double ResearchTakeSevenCount
         {
-            get { return num_researchTakeSevenCount.Value; }
-            set { num_researchTakeSevenCount.Value = value; }
+            get { return decimal.ToDouble(num_researchTakeSevenCount.Value); }
         }
-        public decimal ResearchCriticalFailCount
+        public double ResearchCriticalFailCount
         {
-            get { return num_researchCriticalFailCount.Value; }
-            set { num_researchCriticalFailCount.Value = value; }
+            get { return decimal.ToDouble(num_researchCriticalFailCount.Value); }
         }
-        public decimal BuildPrototypeCount
+        public double BuildPrototypeCount
         {
-            get { return num_buildPrototypeCount.Value; }
-            set { num_buildPrototypeCount.Value = value; }
+            get { return decimal.ToDouble(num_buildPrototypeCount.Value); }
         }
-        public decimal FieldTestCount
+        public double FieldTestCount
         {
-            get { return num_fieldTestCount.Value; }
-            set { num_fieldTestCount.Value = value; }
+            get { return decimal.ToDouble(num_fieldTestCount.Value); }
         }
-        public decimal WorkOutIssuesCount
+        public double WorkOutIssuesCount
         {
-            get { return num_workOutIssuesCount.Value; }
-            set { num_workOutIssuesCount.Value = value; }
+            get { return decimal.ToDouble(num_workOutIssuesCount.Value); }
         }
-        public decimal DevelopTakeSevenCount
+        public double DevelopTakeSevenCount
         {
-            get { return num_developTakeSevenCount.Value; }
-            set { num_developTakeSevenCount.Value = value; }
+            get { return decimal.ToDouble(num_developTakeSevenCount.Value); }
         }
-        public decimal DevelopCriticalFailCount
+        public double DevelopCriticalFailCount
         {
-            get { return num_developCriticalFailCount.Value; }
-            set { num_developCriticalFailCount.Value = value; }
+            get { return decimal.ToDouble(num_developCriticalFailCount.Value); }
         }
 
         public string BaseTN
@@ -227,7 +218,7 @@ namespace DesignCalculator
             update = true;
         }
 
-        private void designCalc_Load(object sender, EventArgs e)
+        private void DesignCalc_Load(object sender, EventArgs e)
         {
             SetFieldValues();
             SetInitialValues();
