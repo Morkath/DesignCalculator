@@ -34,8 +34,7 @@ namespace DesignCalculator
         public int developSevensTaken = 0;
         public int developCriticalFails = 0;
         public double quirksTN = 0;
-        public double projectBPTP = 0;
-        public double projectNoProto = 0;
+        public double projectBlueprintTP = 0;
 
         public string techLevel = "";
         public string unitType = "";
@@ -211,6 +210,7 @@ namespace DesignCalculator
         {
             try
             {
+                double temp = 60 / 5 * (7 - 3);
                 MessageBox.Show("This tool was coded by Morkath.  It was designed by Sprero to calcuate the design costs for producing new units in a Battletech Campaign game.  Version: " + str_versionNum, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -222,7 +222,7 @@ namespace DesignCalculator
         {
             try
             {
-                string fileName = "tempName"; // TRAP TODO Fix this to get input from user.
+                string fileName = "tempName"; //TRAPTODO Fix this to get input from user.
                 string fullFileName = str_saveFileFolder + "\\" + fileName + ".txt";
                 DialogResult saveFile = DialogResult.Yes;
 
@@ -240,7 +240,7 @@ namespace DesignCalculator
                         wt.WriteLine(mainForm.Plans);
                         wt.WriteLine(mainForm.ProjectType);
 
-                        // TRAP TODO add all the other fields that need to get saved.
+                        //TRAPTODO add all the other fields that need to get saved.
 
                         wt.Close();
                     }
@@ -879,16 +879,13 @@ namespace DesignCalculator
                 _blueprintTN = _tempTuple2.Item1;
                 _blueprintTP = _tempTuple2.Item2;
 
-                projectBPTP = _projectTP + blueprintTP;
-                projectNoProto = noPrototypeBayTP;
-
+                projectBlueprintTP = _projectTP + blueprintTP;
+                
                 researchTN = (baseTN + _runSimsTN + _compileTN + _takeSevenTN + _projectTN + _blueprintTN + _protoTypeTN + _criticalFailTN);
                 researchExtraTP = ((baseTP + _runSimsTP + _compileTP + _takeSevenTP + _projectTP + _blueprintTP + _protoTypeTP) * _criticalFailTP) - baseTP;
 
                 mainForm.ResearchTN = Math.Round(researchTN, 3).ToString();
                 mainForm.ResearchTP = Math.Round(researchExtraTP, 3).ToString();
-
-                //TRAPTODO TN, TP, and TotalTP are slightly off.
             }
 
             catch (Exception ex)
@@ -958,7 +955,7 @@ namespace DesignCalculator
                 _blueprintTP = _tempTuple2.Item2;
 
                 developTN = (baseTN + _buildPrototypesTN + _fieldTestTN + _workOutIssuesTN + _projectTN + _takeSevenTN + _blueprintTN + _protoTypeTN + _criticalFailTN);
-                developExtraTP = ((baseTP + _buildPrototypesTP + _fieldTestTP + _workOutIssuesTP + _takeSevenTP + _projectTP + _blueprintTP + _protoTypeTP) * _criticalFailTP) - baseTP;
+                developExtraTP = ((baseTP + _buildPrototypesTP + _fieldTestTP + _workOutIssuesTP + _takeSevenTP + _projectTP + _blueprintTP + _protoTypeTP) * _criticalFailTP) - baseTP - _protoTypeTP - _projectTP - _blueprintTP;
 
                 mainForm.DevelopTN = Math.Round(developTN, 3).ToString();
                 mainForm.DevelopTP = Math.Round(developExtraTP, 3).ToString();
@@ -984,7 +981,8 @@ namespace DesignCalculator
         {
             try
             {
-                mainForm.TotalTP = Math.Round(Convert.ToDouble(mainForm.BaseTP) + Convert.ToDouble(mainForm.ResearchTP) + Convert.ToDouble(mainForm.DevelopTP) - projectBPTP - projectNoProto, 3).ToString();
+                //mainForm.TotalTP = Math.Round(Convert.ToDouble(mainForm.BaseTP) + Convert.ToDouble(mainForm.ResearchTP) + Convert.ToDouble(mainForm.DevelopTP) - projectBlueprintTP - projectNoProto, 3).ToString();
+                mainForm.TotalTP = Math.Round(Convert.ToDouble(mainForm.BaseTP) + Convert.ToDouble(mainForm.ResearchTP) + Convert.ToDouble(mainForm.DevelopTP), 3).ToString();
             }
             catch (Exception ex)
             {
