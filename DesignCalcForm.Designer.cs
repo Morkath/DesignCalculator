@@ -787,6 +787,7 @@
             // 
             // clb_originalPosQuirks
             // 
+            this.clb_originalPosQuirks.CheckOnClick = true;
             this.clb_originalPosQuirks.FormattingEnabled = true;
             this.clb_originalPosQuirks.Location = new System.Drawing.Point(3, 18);
             this.clb_originalPosQuirks.Name = "clb_originalPosQuirks";
@@ -815,6 +816,7 @@
             // 
             // clb_originalNegQuirks
             // 
+            this.clb_originalNegQuirks.CheckOnClick = true;
             this.clb_originalNegQuirks.FormattingEnabled = true;
             this.clb_originalNegQuirks.Location = new System.Drawing.Point(3, 18);
             this.clb_originalNegQuirks.Name = "clb_originalNegQuirks";
@@ -843,6 +845,7 @@
             // 
             // clb_newPosQuirks
             // 
+            this.clb_newPosQuirks.CheckOnClick = true;
             this.clb_newPosQuirks.FormattingEnabled = true;
             this.clb_newPosQuirks.Location = new System.Drawing.Point(3, 18);
             this.clb_newPosQuirks.Name = "clb_newPosQuirks";
@@ -871,6 +874,7 @@
             // 
             // clb_newNegQuirks
             // 
+            this.clb_newNegQuirks.CheckOnClick = true;
             this.clb_newNegQuirks.FormattingEnabled = true;
             this.clb_newNegQuirks.Location = new System.Drawing.Point(3, 18);
             this.clb_newNegQuirks.Name = "clb_newNegQuirks";

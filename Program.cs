@@ -12,6 +12,7 @@ namespace DesignCalculator
         public List<int> positiveQuirksValues = new();
         public List<int> negativeQuirksValues = new();
         public List<int> quirkChangeStepModifier = new();
+        public List<int> quirkChangeStep = new();
 
         public int months = 0;
         public int spCost = 0;
@@ -331,11 +332,11 @@ namespace DesignCalculator
                 myClass.projectTypes.Add(str_majorVar);
                 myClass.projectTypes.Add(str_omniConfig);
 
-                myClass.positiveQuirks.Add("Accurate Weapon");
+                myClass.positiveQuirks.Add("Accurate Weapon 1");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Accurate Weapon");
+                myClass.positiveQuirks.Add("Accurate Weapon 2");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Accurate Weapon");
+                myClass.positiveQuirks.Add("Accurate Weapon 3");
                 myClass.positiveQuirksValues.Add(1);
                 myClass.positiveQuirks.Add("AA Targeting");
                 myClass.positiveQuirksValues.Add(3);
@@ -389,19 +390,19 @@ namespace DesignCalculator
                 myClass.positiveQuirksValues.Add(3);
                 myClass.positiveQuirks.Add("Reinforced Legs");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Rugged");
+                myClass.positiveQuirks.Add("Rugged 1");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Rugged");
+                myClass.positiveQuirks.Add("Rugged 2");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Rugged");
+                myClass.positiveQuirks.Add("Rugged 3");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Rugged");
+                myClass.positiveQuirks.Add("Rugged 4");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Stabilized Weapon");
+                myClass.positiveQuirks.Add("Stabilized Weapon 1");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Stabilized Weapon");
+                myClass.positiveQuirks.Add("Stabilized Weapon 2");
                 myClass.positiveQuirksValues.Add(1);
-                myClass.positiveQuirks.Add("Stabilized Weapon");
+                myClass.positiveQuirks.Add("Stabilized Weapon 3");
                 myClass.positiveQuirksValues.Add(1);
                 myClass.positiveQuirks.Add("Stable");
                 myClass.positiveQuirksValues.Add(2);
@@ -430,11 +431,11 @@ namespace DesignCalculator
                 myClass.negativeQuirksValues.Add(-2);
                 myClass.negativeQuirks.Add("Hard to Pilot");
                 myClass.negativeQuirksValues.Add(-2);
-                myClass.negativeQuirks.Add("Inaccurate Weapon");
+                myClass.negativeQuirks.Add("Inaccurate Weapon 1");
                 myClass.negativeQuirksValues.Add(-1);
-                myClass.negativeQuirks.Add("Inaccurate Weapon");
+                myClass.negativeQuirks.Add("Inaccurate Weapon 2");
                 myClass.negativeQuirksValues.Add(-1);
-                myClass.negativeQuirks.Add("Inaccurate Weapon");
+                myClass.negativeQuirks.Add("Inaccurate Weapon 3");
                 myClass.negativeQuirksValues.Add(-1);
                 myClass.negativeQuirks.Add("Low-Mounted Arms");
                 myClass.negativeQuirksValues.Add(-2);
@@ -469,17 +470,29 @@ namespace DesignCalculator
                 myClass.negativeQuirks.Add("Weak Undercarriage");
                 myClass.negativeQuirksValues.Add(-1);
 
+                myClass.quirkChangeStep.Add(-6);
                 myClass.quirkChangeStepModifier.Add(0);
+                myClass.quirkChangeStep.Add(-5);
                 myClass.quirkChangeStepModifier.Add(1);
+                myClass.quirkChangeStep.Add(-4);
                 myClass.quirkChangeStepModifier.Add(1);
+                myClass.quirkChangeStep.Add(-3);
                 myClass.quirkChangeStepModifier.Add(1);
+                myClass.quirkChangeStep.Add(-2);
                 myClass.quirkChangeStepModifier.Add(2);
+                myClass.quirkChangeStep.Add(-1);
                 myClass.quirkChangeStepModifier.Add(2);
+                myClass.quirkChangeStep.Add(0);
                 myClass.quirkChangeStepModifier.Add(3);
+                myClass.quirkChangeStep.Add(1);
                 myClass.quirkChangeStepModifier.Add(5);
+                myClass.quirkChangeStep.Add(2);
                 myClass.quirkChangeStepModifier.Add(8);
+                myClass.quirkChangeStep.Add(3);
                 myClass.quirkChangeStepModifier.Add(12);
+                myClass.quirkChangeStep.Add(4);
                 myClass.quirkChangeStepModifier.Add(17);
+                myClass.quirkChangeStep.Add(5);
 
                 myClass.veeRetroBaseTP = 0;
                 myClass.veeIntroBaseTP = 1;
@@ -595,12 +608,12 @@ namespace DesignCalculator
             UpdateUnitType();
             UpdateBaseTNTP();
             UpdateResearchTNTP();
+            UpdateQuirkTN();
             UpdateDevelopTNTP();
             UpdateSPCost();
             UpdateTotalTP();
             UpdateMonths();
             UpdateSorties();
-            UpdateQuirkTN();
         }
 
         // Form Updates
@@ -957,6 +970,8 @@ namespace DesignCalculator
                 developTN = (baseTN + _buildPrototypesTN + _fieldTestTN + _workOutIssuesTN + _projectTN + _takeSevenTN + _blueprintTN + _protoTypeTN + _criticalFailTN);
                 developExtraTP = ((baseTP + _buildPrototypesTP + _fieldTestTP + _workOutIssuesTP + _takeSevenTP + _projectTP + _blueprintTP + _protoTypeTP) * _criticalFailTP) - baseTP - _protoTypeTP - _projectTP - _blueprintTP;
 
+                developTN += Convert.ToDouble(mainForm.QuirkTN);
+
                 mainForm.DevelopTN = Math.Round(developTN, 3).ToString();
                 mainForm.DevelopTP = Math.Round(developExtraTP, 3).ToString();
             }
@@ -1016,7 +1031,69 @@ namespace DesignCalculator
         {
             try
             {
-                //TRAPTODO Calculate quirk TN number
+                int _tn = 0;
+                int _iteration = 0;
+                int _quirkStepOrig = 0;
+                int _quirkStepNew = 0;
+                int _origPosQuirkVal = 0;
+                int _newPosQuirkVal = 0;
+                int _origNegQuirkVal = 0;
+                int _newNegQuirkVal = 0;
+                int _quirkStartStep = 0;
+                int _quirkEndStep = 0;
+
+                _origPosQuirkVal = comparePosQuirks(mainForm.OriginalPosQuirks);
+                _newPosQuirkVal = comparePosQuirks(mainForm.NewPosQuirks);
+                _origNegQuirkVal = compareNegQuirks(mainForm.OriginalNegQuirks);
+                _newNegQuirkVal = compareNegQuirks(mainForm.NewNegQuirks);
+
+                _quirkStepOrig = (_origPosQuirkVal - _origNegQuirkVal);
+                _quirkStepNew = (_newPosQuirkVal - _newNegQuirkVal);
+
+                //TRAPTODO This needs to add each change step together for the final TN.  For example, going from -6 to 5, would add all 12 TN's together.
+                //TRAPTODO start at original quirk step, end at new quirk step.
+
+                // Find our start and end points.
+                foreach (var item in quirkChangeStep)
+                {
+                    if (item == _quirkStepOrig)
+                    {
+                        _quirkStartStep = _iteration;
+                    }
+
+                    if (item == _quirkStepNew)
+                    {
+                        _quirkEndStep = _iteration;
+                    }
+
+                    _iteration++;
+                }
+
+                //TRAPTODO This part isn't giving the right number, removing prototype should be 4, it's giving 13.
+                // Add up our TN from the start and end points.
+                if (_quirkStartStep > _quirkEndStep)
+                {
+                    int _i = _quirkStartStep;
+
+                    while(_i > _quirkEndStep)
+                    {
+                        _tn += quirkChangeStepModifier[_i];
+                        _i--;
+                    }
+                    
+                }
+                else
+                {
+                    int _i = _quirkStartStep;
+
+                    while (_i < _quirkEndStep)
+                    {
+                        _tn += quirkChangeStepModifier[_i];
+                        _i++;
+                    }
+                }
+
+                mainForm.QuirkTN = _tn.ToString();
             }
             catch (Exception ex)
             {
@@ -1087,6 +1164,41 @@ namespace DesignCalculator
             }
 
             return Tuple.Create(_blueprintTN, _blueprintTP);
+        }
+
+        private int comparePosQuirks(CheckedListBox.CheckedItemCollection posQuirkList)
+        {
+            var _tn = 0;
+            var _iteration = 0;
+
+            foreach (string item in positiveQuirks)
+            {
+                if (posQuirkList.Contains(item))
+                {
+                    _tn += positiveQuirksValues[_iteration];
+                }
+
+                _iteration++;
+            }
+
+            return _tn;
+        }
+        private int compareNegQuirks(CheckedListBox.CheckedItemCollection negQuirKList)
+        {
+            var _tn = 0;
+            var _iteration = 0;
+
+            foreach (string item in negativeQuirks)
+            {
+                if (negQuirKList.Contains(item))
+                {
+                    _tn += negativeQuirksValues[_iteration];
+                }
+
+                _iteration++;
+            }
+
+            return _tn;
         }
     }
 }

@@ -175,21 +175,21 @@ namespace DesignCalculator
             set { cb_developCriticalFail.Checked = value; }
         }
 
-        public ListBox.SelectedObjectCollection OriginalPosQuirks
+        public CheckedListBox.CheckedItemCollection OriginalPosQuirks
         {
-            get { return clb_originalPosQuirks.SelectedItems; }
+            get { return clb_originalPosQuirks.CheckedItems; }
         }
-        public ListBox.SelectedObjectCollection OriginalNegQuirks
+        public CheckedListBox.CheckedItemCollection OriginalNegQuirks
         {
-            get { return clb_originalNegQuirks.SelectedItems; }
+            get { return clb_originalNegQuirks.CheckedItems; }
         }
-        public ListBox.SelectedObjectCollection NewPosQuirks
+        public CheckedListBox.CheckedItemCollection NewPosQuirks
         {
-            get { return clb_newPosQuirks.SelectedItems; }
+            get { return clb_newPosQuirks.CheckedItems; }
         }
-        public ListBox.SelectedObjectCollection NewNegQuirks
+        public CheckedListBox.CheckedItemCollection NewNegQuirks
         {
-            get { return clb_newNegQuirks.SelectedItems; }
+            get { return clb_newNegQuirks.CheckedItems; }
         }
 
         public DesignCalcForm(Program myClass)
