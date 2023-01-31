@@ -260,6 +260,13 @@ namespace DesignCalculator
             incomingList.ForEach(delegate (string s) { clb_newNegQuirks.Items.Add(s); });
         }
 
+        public void UnselectCheckedListBoxItem()
+        {
+            // Gets the currently selected quirk and unselects it.
+            CheckedListBox myControl = (CheckedListBox)ActiveControl;
+            myControl.SetItemChecked(myControl.SelectedIndex, false);
+        }
+
         // Event Handlers
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {

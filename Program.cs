@@ -142,6 +142,8 @@ namespace DesignCalculator
         public double dropAdvBaseTN = 0;
         public double dropExpBaseTN = 0;
 
+        public bool perkSelected = false;
+
         private const string str_retroTechLvl = "Retro";
         private const string str_introTechLvl = "Intro";
         private const string str_stdTechLvl = "Standard";
@@ -493,6 +495,12 @@ namespace DesignCalculator
                 myClass.quirkChangeStep.Add(4);
                 myClass.quirkChangeStepModifier.Add(17);
                 myClass.quirkChangeStep.Add(5);
+                myClass.quirkChangeStepModifier.Add(23);
+                myClass.quirkChangeStep.Add(6);
+                myClass.quirkChangeStepModifier.Add(30);
+                myClass.quirkChangeStep.Add(7);
+                myClass.quirkChangeStepModifier.Add(38);
+                myClass.quirkChangeStep.Add(8);
 
                 myClass.veeRetroBaseTP = 0;
                 myClass.veeIntroBaseTP = 1;
@@ -1042,58 +1050,82 @@ namespace DesignCalculator
                 int _quirkStartStep = 0;
                 int _quirkEndStep = 0;
 
+                //This adds each change step together for the final TN.  For example, going from -6 to 5, would add all 12 TN's together.  Going from 0 to 2 would add 0->1 and 1->2 TN together.
+
                 _origPosQuirkVal = comparePosQuirks(mainForm.OriginalPosQuirks);
                 _newPosQuirkVal = comparePosQuirks(mainForm.NewPosQuirks);
                 _origNegQuirkVal = compareNegQuirks(mainForm.OriginalNegQuirks);
                 _newNegQuirkVal = compareNegQuirks(mainForm.NewNegQuirks);
 
-                _quirkStepOrig = (_origPosQuirkVal - _origNegQuirkVal);
-                _quirkStepNew = (_newPosQuirkVal - _newNegQuirkVal);
+                _quirkStepOrig = (_origPosQuirkVal + _origNegQuirkVal);
+                _quirkStepNew = (_newPosQuirkVal + _newNegQuirkVal);
 
-                //TRAPTODO This needs to add each change step together for the final TN.  For example, going from -6 to 5, would add all 12 TN's together.
-                //TRAPTODO start at original quirk step, end at new quirk step.
-
-                // Find our start and end points.
-                foreach (var item in quirkChangeStep)
+                // Check to make sure we are within the bounds
+                if (_quirkStepOrig <= quirkChangeStep.Last() && _quirkStepOrig >= quirkChangeStep.First() && _quirkStepNew <= quirkChangeStep.Last() && _quirkStepNew >= quirkChangeStep.First())
                 {
-                    if (item == _quirkStepOrig)
+                    // Find our start and end points.
+                    foreach (var item in quirkChangeStep)
                     {
-                        _quirkStartStep = _iteration;
+                        if (item == _quirkStepOrig)
+                        {
+                            _quirkStartStep = _iteration;
+                        }
+
+                        if (item == _quirkStepNew)
+                        {
+                            _quirkEndStep = _iteration;
+                        }
+
+                        _iteration++;
                     }
 
-                    if (item == _quirkStepNew)
+                    // Add up our TN from the start and end points.
+
+                    // Handles one step.
+                    if (_quirkStartStep == (_quirkEndStep - 1))
                     {
-                        _quirkEndStep = _iteration;
+                        _tn += quirkChangeStepModifier[_quirkStartStep];
+                    }
+                    // Handles multiple removals.
+                    else if (_quirkStartStep > _quirkEndStep)
+                    {
+                        int _i = _quirkStartStep - 1;
+
+                        while(_i >= _quirkEndStep)
+                        {
+                            _tn += quirkChangeStepModifier[_i];
+                            _i--;
+                        }
+                    }
+                    // Handles multiple additions.
+                    else
+                    {
+                        if (_quirkStartStep != _quirkEndStep)
+                        { 
+                            int _i = _quirkStartStep;
+
+                            while (_i < _quirkEndStep)
+                            {
+                                _tn += quirkChangeStepModifier[_i];
+                                _i++;
+                            }
+                        }
+                        else if (perkSelected)
+                        {
+                            _tn += quirkChangeStepModifier[_quirkStartStep];
+                        }
                     }
 
-                    _iteration++;
-                }
-
-                //TRAPTODO This part isn't giving the right number, removing prototype should be 4, it's giving 13.
-                // Add up our TN from the start and end points.
-                if (_quirkStartStep > _quirkEndStep)
-                {
-                    int _i = _quirkStartStep;
-
-                    while(_i > _quirkEndStep)
-                    {
-                        _tn += quirkChangeStepModifier[_i];
-                        _i--;
-                    }
-                    
+                    mainForm.QuirkTN = _tn.ToString();
                 }
                 else
                 {
-                    int _i = _quirkStartStep;
-
-                    while (_i < _quirkEndStep)
-                    {
-                        _tn += quirkChangeStepModifier[_i];
-                        _i++;
-                    }
+                    // Unselects the currently selected quirk so the user doesn't have to.
+                    mainForm.UnselectCheckedListBoxItem(); 
+                    MessageBox.Show("Too many quirks selected.", "Form Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                mainForm.QuirkTN = _tn.ToString();
+                perkSelected = false;
             }
             catch (Exception ex)
             {
@@ -1181,6 +1213,11 @@ namespace DesignCalculator
                 _iteration++;
             }
 
+            if (_tn != 0)
+            {
+                perkSelected = true;
+            }
+
             return _tn;
         }
         private int compareNegQuirks(CheckedListBox.CheckedItemCollection negQuirKList)
@@ -1196,6 +1233,11 @@ namespace DesignCalculator
                 }
 
                 _iteration++;
+            }
+
+            if (_tn != 0)
+            {
+                perkSelected = true;
             }
 
             return _tn;
