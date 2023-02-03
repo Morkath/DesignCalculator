@@ -233,9 +233,7 @@ namespace DesignCalculator
             tempString += "Develop: Then set the new positive and negative quirks, but make one change that you are going to make this development attempt.  For example, add the barrel fist positive quirk. " + Environment.NewLine;
             tempString += "Develop: Toggle how many times you make an attempt to work out issues, take seven, or critically fail until you beat the Development TN. " + Environment.NewLine;
             tempString += "Develop: Finally, repeat this until your quirk list is finalized, leaving removing the Prototype quirk for last. " + Environment.NewLine;
-
-            var tempMessageBox = new MessageBox();
-            
+           
             MessageBox.Show(tempString, "Instructions", MessageBoxButtons.OK);
         }
         public void SaveDesignFile()
