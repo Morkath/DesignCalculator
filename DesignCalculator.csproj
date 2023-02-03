@@ -6,6 +6,15 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <PackageIcon></PackageIcon>
+    <PackageProjectUrl>https://github.com/Morkath/DesignCalculator</PackageProjectUrl>
+    <Title>Design Calculator</Title>
+    <RepositoryUrl>https://github.com/Morkath/DesignCalculator</RepositoryUrl>
+    <ApplicationIcon>32x32_FactoryLogo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="32x32_FactoryLogo.ico" />
+  </ItemGroup>
 
 </Project>
