@@ -29,38 +29,47 @@ namespace DesignCalculator
         public double SimulationCount
         {
             get { return decimal.ToDouble(num_runSimsCount.Value); }
+            set { num_runSimsCount.Value = Convert.ToDecimal(value); }
         }
         public double CompileCount
         {
             get { return decimal.ToDouble(num_compileDesignCount.Value); }
+            set { num_compileDesignCount.Value = Convert.ToDecimal(value); }
         }
         public double ResearchTakeSevenCount
         {
             get { return decimal.ToDouble(num_researchTakeSevenCount.Value); }
+            set { num_researchTakeSevenCount.Value = Convert.ToDecimal(value); }
         }
         public double ResearchCriticalFailCount
         {
             get { return decimal.ToDouble(num_researchCriticalFailCount.Value); }
+            set { num_researchCriticalFailCount.Value = Convert.ToDecimal(value); }
         }
         public double BuildPrototypeCount
         {
             get { return decimal.ToDouble(num_buildPrototypeCount.Value); }
+            set { num_buildPrototypeCount.Value = Convert.ToDecimal(value); }
         }
         public double FieldTestCount
         {
             get { return decimal.ToDouble(num_fieldTestCount.Value); }
+            set { num_fieldTestCount.Value = Convert.ToDecimal(value); }
         }
         public double WorkOutIssuesCount
         {
             get { return decimal.ToDouble(num_workOutIssuesCount.Value); }
+            set { num_workOutIssuesCount.Value = Convert.ToDecimal(value); }
         }
         public double DevelopTakeSevenCount
         {
             get { return decimal.ToDouble(num_developTakeSevenCount.Value); }
+            set { num_developTakeSevenCount.Value = Convert.ToDecimal(value); }
         }
         public double DevelopCriticalFailCount
         {
             get { return decimal.ToDouble(num_developCriticalFailCount.Value); }
+            set { num_developCriticalFailCount.Value = Convert.ToDecimal(value); }
         }
 
         public string BaseTN

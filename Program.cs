@@ -1,3 +1,5 @@
+using System.Windows.Forms;
+
 namespace DesignCalculator
 {
     public class Program
@@ -225,32 +227,50 @@ namespace DesignCalculator
         {
             try
             {
-                string fileName = "tempName"; //TRAPTODO Fix this to get input from user.
-                string fullFileName = str_saveFileFolder + "\\" + fileName + ".txt";
-                DialogResult saveFile = DialogResult.Yes;
+                
 
-                if (File.Exists(fullFileName))
-                {
-                    saveFile = MessageBox.Show("File exists, Overwrite?", "File Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                }
+                SaveFileDialog saveFileDialog = new();
+                saveFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory + str_saveFileFolder;
+                saveFileDialog.Title = "Save Design";
+                saveFileDialog.DefaultExt = "txt";
+                saveFileDialog.Filter = "txt files (*.txt)|*.txt";
+                saveFileDialog.CheckPathExists = true;
+                saveFileDialog.RestoreDirectory = true;
 
-                if (saveFile == DialogResult.Yes)
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    using (StreamWriter wt = new(fullFileName))
+                    using (StreamWriter wt = new(saveFileDialog.FileName))
                     {
                         wt.WriteLine(mainForm.UnitType);
                         wt.WriteLine(mainForm.Techlevel);
+                        wt.WriteLine(mainForm.PrototypeBay);
                         wt.WriteLine(mainForm.Plans);
                         wt.WriteLine(mainForm.ProjectType);
-
-                        //TRAPTODO add all the other fields that need to get saved.
+                        wt.WriteLine(mainForm.RunSims);
+                        wt.WriteLine(mainForm.SimulationCount);
+                        wt.WriteLine(mainForm.CompileDesigns);
+                        wt.WriteLine(mainForm.CompileCount);
+                        wt.WriteLine(mainForm.ResearchTakeSeven);
+                        wt.WriteLine(mainForm.ResearchTakeSevenCount);
+                        wt.WriteLine(mainForm.ResearchCriticalFail);
+                        wt.WriteLine(mainForm.ResearchCriticalFailCount);
+                        wt.WriteLine(mainForm.BuildPrototypes);
+                        wt.WriteLine(mainForm.BuildPrototypeCount);
+                        wt.WriteLine(mainForm.PrototypeCost);
+                        wt.WriteLine(mainForm.FieldTest);
+                        wt.WriteLine(mainForm.FieldTestCount);
+                        wt.WriteLine(mainForm.WorkOutIssues);
+                        wt.WriteLine(mainForm.WorkOutIssuesCount);
+                        wt.WriteLine(mainForm.DevelopTakeSeven);
+                        wt.WriteLine(mainForm.DevelopTakeSevenCount);
+                        wt.WriteLine(mainForm.DevelopCriticalFail);
+                        wt.WriteLine(mainForm.DevelopCriticalFailCount);
 
                         wt.Close();
                     }
                 }
                 else
                 {
-                    saveFile = DialogResult.No;
                     MessageBox.Show("File not saved.", "File Not Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -281,11 +301,28 @@ namespace DesignCalculator
                     {
                         mainForm.UnitType = int.Parse(rt.ReadLine());
                         mainForm.Techlevel = int.Parse(rt.ReadLine());
+                        mainForm.PrototypeBay = bool.Parse(rt.ReadLine());
                         mainForm.Plans = int.Parse(rt.ReadLine());
                         mainForm.ProjectType = int.Parse(rt.ReadLine());
-
-                        // TRAP TODO add all the other fields that need to get loaded.
-
+                        mainForm.RunSims = bool.Parse(rt.ReadLine());
+                        mainForm.SimulationCount = int.Parse(rt.ReadLine());
+                        mainForm.CompileDesigns = bool.Parse(rt.ReadLine());
+                        mainForm.CompileCount = int.Parse(rt.ReadLine());
+                        mainForm.ResearchTakeSeven = bool.Parse(rt.ReadLine());
+                        mainForm.ResearchTakeSevenCount = int.Parse(rt.ReadLine());
+                        mainForm.ResearchCriticalFail = bool.Parse(rt.ReadLine());
+                        mainForm.ResearchCriticalFailCount = int.Parse(rt.ReadLine());
+                        mainForm.BuildPrototypes = bool.Parse(rt.ReadLine());
+                        mainForm.BuildPrototypeCount = int.Parse(rt.ReadLine());
+                        mainForm.PrototypeCost = rt.ReadLine();
+                        mainForm.FieldTest = bool.Parse(rt.ReadLine());
+                        mainForm.FieldTestCount =int.Parse(rt.ReadLine());
+                        mainForm.WorkOutIssues = bool.Parse(rt.ReadLine());
+                        mainForm.WorkOutIssuesCount =int.Parse(rt.ReadLine());
+                        mainForm.DevelopTakeSeven = bool.Parse(rt.ReadLine());
+                        mainForm.DevelopTakeSevenCount = int.Parse(rt.ReadLine());
+                        mainForm.DevelopCriticalFail = bool.Parse(rt.ReadLine());
+                        mainForm.DevelopCriticalFailCount = int.Parse(rt.ReadLine());
 
                         rt.Close();
                     }
