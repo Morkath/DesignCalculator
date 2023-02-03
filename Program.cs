@@ -215,7 +215,6 @@ namespace DesignCalculator
         {
             try
             {
-                double temp = 60 / 5 * (7 - 3);
                 MessageBox.Show("This tool was coded by Morkath.  It was designed by Sprero to calcuate the design costs for producing new units in a Battletech Campaign game.  Version: " + str_versionNum, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -265,6 +264,30 @@ namespace DesignCalculator
                         wt.WriteLine(mainForm.DevelopTakeSevenCount);
                         wt.WriteLine(mainForm.DevelopCriticalFail);
                         wt.WriteLine(mainForm.DevelopCriticalFailCount);
+
+                        foreach (var item in mainForm.CheckedOriginalPosQuirks)
+                        {
+                            wt.WriteLine(item);
+                        }
+                        wt.WriteLine("EndOrigPosQuirks");
+
+                        foreach (var item in mainForm.CheckedOriginalNegQuirks)
+                        {
+                            wt.WriteLine(item);
+                        }
+                        wt.WriteLine("EndOrigNegQuirks");
+
+                        foreach (var item in mainForm.CheckedNewPosQuirks)
+                        {
+                            wt.WriteLine(item);
+                        }
+                        wt.WriteLine("EndNewPosQuirks");
+
+                        foreach (var item in mainForm.CheckedNewNegQuirks)
+                        {
+                            wt.WriteLine(item);
+                        }
+                        wt.WriteLine("EndNewNegQuirks");
 
                         wt.Close();
                     }
@@ -323,6 +346,45 @@ namespace DesignCalculator
                         mainForm.DevelopTakeSevenCount = int.Parse(rt.ReadLine());
                         mainForm.DevelopCriticalFail = bool.Parse(rt.ReadLine());
                         mainForm.DevelopCriticalFailCount = int.Parse(rt.ReadLine());
+
+                        string? line = "";
+                        List<string> tempStrList = new List<string>();
+
+                        while ((line = rt.ReadLine()) != "EndOrigPosQuirks")
+                        {
+                            tempStrList.Add(line);
+                        }
+
+                        mainForm.CheckOriginalPosQuirks = tempStrList;
+
+                        tempStrList.Clear();
+
+                        while ((line = rt.ReadLine()) != "EndOrigNegQuirks")
+                        {
+                            tempStrList.Add(line);
+                        }
+
+                        mainForm.CheckOriginalNegQuirks = tempStrList;
+
+                        tempStrList.Clear();
+
+                        while ((line = rt.ReadLine()) != "EndNewPosQuirks")
+                        {
+                            tempStrList.Add(line);
+                        }
+
+                        mainForm.CheckNewPosQuirks = tempStrList;
+
+                        tempStrList.Clear();
+
+                        while ((line = rt.ReadLine()) != "EndNewNegQuirks")
+                        {
+                            tempStrList.Add(line);
+                        }
+
+                        mainForm.CheckNewNegQuirks = tempStrList;
+
+                        tempStrList.Clear();
 
                         rt.Close();
                     }
@@ -1089,10 +1151,10 @@ namespace DesignCalculator
 
                 //This adds each change step together for the final TN.  For example, going from -6 to 5, would add all 12 TN's together.  Going from 0 to 2 would add 0->1 and 1->2 TN together.
 
-                _origPosQuirkVal = comparePosQuirks(mainForm.OriginalPosQuirks);
-                _newPosQuirkVal = comparePosQuirks(mainForm.NewPosQuirks);
-                _origNegQuirkVal = compareNegQuirks(mainForm.OriginalNegQuirks);
-                _newNegQuirkVal = compareNegQuirks(mainForm.NewNegQuirks);
+                _origPosQuirkVal = comparePosQuirks(mainForm.CheckedOriginalPosQuirks);
+                _newPosQuirkVal = comparePosQuirks(mainForm.CheckedNewPosQuirks);
+                _origNegQuirkVal = compareNegQuirks(mainForm.CheckedOriginalNegQuirks);
+                _newNegQuirkVal = compareNegQuirks(mainForm.CheckedNewNegQuirks);
 
                 _quirkStepOrig = (_origPosQuirkVal + _origNegQuirkVal);
                 _quirkStepNew = (_newPosQuirkVal + _newNegQuirkVal);

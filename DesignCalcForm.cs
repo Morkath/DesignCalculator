@@ -184,21 +184,37 @@ namespace DesignCalculator
             set { cb_developCriticalFail.Checked = value; }
         }
 
-        public CheckedListBox.CheckedItemCollection OriginalPosQuirks
+        public CheckedListBox.CheckedItemCollection CheckedOriginalPosQuirks
         {
             get { return clb_originalPosQuirks.CheckedItems; }
         }
-        public CheckedListBox.CheckedItemCollection OriginalNegQuirks
+        public List<string> CheckOriginalPosQuirks
+        {
+            set { CheckQuirkLists(value, clb_originalPosQuirks); }
+        }
+        public CheckedListBox.CheckedItemCollection CheckedOriginalNegQuirks
         {
             get { return clb_originalNegQuirks.CheckedItems; }
         }
-        public CheckedListBox.CheckedItemCollection NewPosQuirks
+        public List<string> CheckOriginalNegQuirks
+        {
+            set { CheckQuirkLists(value, clb_originalNegQuirks); }
+        }
+        public CheckedListBox.CheckedItemCollection CheckedNewPosQuirks
         {
             get { return clb_newPosQuirks.CheckedItems; }
         }
-        public CheckedListBox.CheckedItemCollection NewNegQuirks
+        public List<string> CheckNewPosQuirks
+        {
+            set { CheckQuirkLists(value, clb_newPosQuirks); }
+        }
+        public CheckedListBox.CheckedItemCollection CheckedNewNegQuirks
         {
             get { return clb_newNegQuirks.CheckedItems; }
+        }
+        public List<string> CheckNewNegQuirks
+        {
+            set { CheckQuirkLists(value, clb_newNegQuirks); }
         }
 
         public DesignCalcForm(Program myClass)
@@ -267,6 +283,25 @@ namespace DesignCalculator
         private void UpdateNewNegQuirks(List<string> incomingList)
         {
             incomingList.ForEach(delegate (string s) { clb_newNegQuirks.Items.Add(s); });
+        }
+        private void CheckQuirkLists(List<string> incomingList, CheckedListBox tempCheckedList)
+        {
+            for (int i = tempCheckedList.Items.Count - 1; i >= 0; i--)
+            {
+                tempCheckedList.SetItemChecked(i, false);
+            }
+
+            //Only the last item in the list is getting checked.
+            foreach (string str in incomingList)
+            {
+                for (int i = tempCheckedList.Items.Count - 1; i >= 0; i--)
+                {
+                    if (tempCheckedList.Items[i].ToString() == str)
+                    {
+                        tempCheckedList.SetItemChecked(i, true);
+                    }
+                }
+            }
         }
 
         public void UnselectCheckedListBoxItem()
