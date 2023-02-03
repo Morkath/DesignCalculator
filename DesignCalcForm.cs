@@ -1,3 +1,5 @@
+using System.Drawing.Text;
+
 namespace DesignCalculator
 {
     public partial class DesignCalcForm : Form
@@ -324,6 +326,10 @@ namespace DesignCalculator
         {
             myProgram.AboutDialog();
         }
+        private void instructionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            myProgram.DisplayInstructions();
+        }
 
         private void comb_unitType_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -441,6 +447,5 @@ namespace DesignCalculator
         {
             if (update) { myProgram.UpdateValues(); };
         }
-
     }
 }

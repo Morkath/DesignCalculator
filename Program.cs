@@ -222,6 +222,22 @@ namespace DesignCalculator
                 MessageBox.Show("Error Showing About.  " + ex.ToString(), "Form Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public void DisplayInstructions()
+        {
+            
+            string tempString = "Project: Select your unit type and tech level. " + Environment.NewLine;
+            tempString += "Project: Select if you don't have a prototype bay, what types of plans you are using, and what the project type is. " + Environment.NewLine + Environment.NewLine;
+            tempString += "Research: Select how many simulations you want to run, then how many times you make an attempt to compile, take seven, or critically fail until you beat the Research TN. " + Environment.NewLine + Environment.NewLine;
+            tempString += "Develop: Select how many prototypes you are building, their cost, and how many field tests you are going to run. " + Environment.NewLine;
+            tempString += "Develop: Now set your original positive and negative quirks, remember to include the Prototype negative quirk " + Environment.NewLine;
+            tempString += "Develop: Then set the new positive and negative quirks, but make one change that you are going to make this development attempt.  For example, add the barrel fist positive quirk. " + Environment.NewLine;
+            tempString += "Develop: Toggle how many times you make an attempt to work out issues, take seven, or critically fail until you beat the Development TN. " + Environment.NewLine;
+            tempString += "Develop: Finally, repeat this until your quirk list is finalized, leaving removing the Prototype quirk for last. " + Environment.NewLine;
+
+            var tempMessageBox = new MessageBox();
+            
+            MessageBox.Show(tempString, "Instructions", MessageBoxButtons.OK);
+        }
         public void SaveDesignFile()
         {
             try
